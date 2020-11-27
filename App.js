@@ -18,6 +18,7 @@ export default function App() {
 
    const onPressAdd=()=>{
      if(getText!=""){
+       if(getPer>0 &&getPer<101){
        
        setNum(getNum+1)
        
@@ -38,10 +39,14 @@ export default function App() {
           ])
 
         }
+        else{
+          alert("Enter percentage >0 and <100")
+        }
         setText('')
         setPer('')
         }
-   
+
+   }
    
    const deleteitem=(itemkey)=>{
     //  var list=getList.filter(item=>item.key!=itemkey);
@@ -70,7 +75,6 @@ export default function App() {
          <TextInput
               placeholder="Enter Percentage"
               style={styles.textinput}
-              keyboardType={'number-pad'}
               onChangeText={text => setPer(text)}
               value={getPer}
 
@@ -87,7 +91,6 @@ export default function App() {
       <TouchableOpacity  onPress={onPressAdd}>
           <Text style={styles.texstyles}>Calculate</Text>           
       </TouchableOpacity>
-             
         <ScrollView style={styles.scrollview}>
            {getList.map((item) => 
            <TouchableOpacity key={item.key}>
