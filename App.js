@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Text, TouchableOpacity,View,ScrollView, StyleSheet,Button,TextInput} from 'react-native';
+import { Text, TouchableOpacity,View,ScrollView, StyleSheet,Button,TextInput,Keyboard} from 'react-native';
 
 
 // You can import from local files
@@ -13,11 +13,12 @@ export default function App() {
    const [getDisText,setDisText]=useState('');
    const [getPer,setPer]=useState('')
    const [getList,setList]=useState([]);
-   const [getNum,setNum]=useState()
+   const [getNum,setNum]=useState();
+   const [getYS,setYS]=useState('')
 
    const onPressAdd=()=>{
      if(getText!=""){
-       if(getText>0 && getPer>0){
+       
        setNum(getNum+1)
        
           var x=getText
@@ -27,6 +28,8 @@ export default function App() {
           alert(z)
           setDisText(z)
           var cal="Your save "+l+" final price: "+z;
+          setYS(l)
+
 
       //  setText('')
        setList([
@@ -38,12 +41,14 @@ export default function App() {
         setText('')
         setPer('')
         }
-   }
+   
+   
    const deleteitem=(itemkey)=>{
     //  var list=getList.filter(item=>item.key!=itemkey);
     //  setList(list)
      setList(list => getList.filter(item=>item.key!=itemkey));
    }
+
 
   return (
     <View style={styles.container}>
@@ -60,29 +65,28 @@ export default function App() {
            
     
       </View>
-<View style={styles.outview}>  
+      <View style={styles.outview}>  
       
-       <TextInput
+         <TextInput
               placeholder="Enter Percentage"
               style={styles.textinput}
-               keyboardType={'numeric'}
-             onChangeText={text => setPer(text)}
+              keyboardType={'number-pad'}
+              onChangeText={text => setPer(text)}
               value={getPer}
+
             />
 
-</View>
+        </View>
        
        <View style={styles.outview}>  
-
-
-       <Text style={styles.textcontainer}>{getDisText}</Text>
-       
-       
-
-</View>
-            <TouchableOpacity  onPress={onPressAdd}>
-                <Text style={styles.texstyles}>Calculate</Text>           
-            </TouchableOpacity>
+          <Text style={styles.distext}>Final Price:{getDisText}</Text>
+       </View>
+        <View style={styles.outview}>  
+          <Text style={styles.distext}>You Saved:{getYS}</Text>
+       </View>
+      <TouchableOpacity  onPress={onPressAdd}>
+          <Text style={styles.texstyles}>Calculate</Text>           
+      </TouchableOpacity>
              
         <ScrollView style={styles.scrollview}>
            {getList.map((item) => 
@@ -110,6 +114,13 @@ const styles = StyleSheet.create({
     fontSize:16,
     padding:10,
     borderBottomWidth:2,
+  },
+  distext:{
+    fontSize:16,
+    borderBottomColor:"blue",
+    borderWidth:2,
+    width:"100%",
+    padding:10,
   },
  outview:{
     justifyContent:"space-between",
