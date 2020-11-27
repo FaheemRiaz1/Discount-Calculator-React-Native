@@ -92,7 +92,7 @@ export default function App() {
            {getList.map((item) => 
            <TouchableOpacity key={item.key}>
            <View style={styles.ScrollViewItem} >
-              <Text style={styles.scrollviewtext}>{item.no}: {item.data}</Text>
+              <Text style={styles.scrollviewtext}> {item.data}</Text>
               <TouchableOpacity  onPress={()=>deleteitem(item.key)}>
                 <View style={styles.smallview}> 
                      <Text style={styles.smalltext}>X</Text>
